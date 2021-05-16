@@ -27,10 +27,11 @@
     <div class="container">
       <div class="row justify-content-center">
         <div class="col col-12 col-sm-6 col-xl-4 p-4 form-border">
-          <form @submit.prevent>
+          <form @submit.prevent="submitUser()">
             <div class="mb-3">
               <label for="emailInput" class="form-label">Email address</label>
               <input
+                v-model="userEmail"
                 type="email"
                 class="form-control"
                 id="emailInput"
@@ -44,6 +45,7 @@
             <label for="psdInput" class="form-label">Password</label>
             <div class="input-group mb-3">
               <input
+                v-model="userPwd"
                 type="password"
                 class="form-control"
                 id="psdInput"
@@ -93,11 +95,14 @@
 </template>
 
 <script>
+import { createUser } from "@/api/login.js";
 export default {
   data() {
     return {
       isLogin: true,
       imgType: "password",
+      userEmail: "",
+      userPwd: "",
     };
   },
   methods: {
@@ -110,6 +115,10 @@ export default {
       this.imgType === "password"
         ? (this.$refs["psdInput"].type = "text")
         : (this.$refs["psdInput"].type = "password");
+    },
+    submitUser() {
+      console.log(this.userEmail, this.userPwd);
+      createUser(this.userEmail, this.userPwd);
     },
   },
 };

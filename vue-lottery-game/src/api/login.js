@@ -1,12 +1,11 @@
-import request from "@/api/request";
+import axios from "axios";
 
-export function getCurrentUser(username, password) {
-  return request({
-    url: "",
-    method: "post",
-    params: {
-      username,
-      password,
-    },
-  });
+export function createUser(userEmail, userPassword) {
+  return axios.post(
+    "https://vue-lottery-game-default-rtdb.europe-west1.firebasedatabase.app/users.json",
+    {
+      email: userEmail,
+      password: userPassword,
+    }
+  );
 }
