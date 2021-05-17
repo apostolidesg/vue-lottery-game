@@ -10,8 +10,7 @@ export default {
     return new Promise((resolve, reject) => {
       authUser(isLogin, userEmail, userPassword)
         .then((response) => {
-          // const expiresIn = +response.expiresIn * 1000;
-          const expiresIn = 5000;
+          const expiresIn = +response.expiresIn * 1000;
           const expirationDate = new Date().getTime() + expiresIn;
 
           localStorage.setItem("token", response.data.idToken);
