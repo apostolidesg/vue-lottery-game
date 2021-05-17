@@ -1,11 +1,14 @@
 <template>
-  <div class="home">
-    home
-  </div>
+  <number-table></number-table>
 </template>
 
 <script>
-export default {};
+import NumberTable from "@/components/NumberTable.vue";
+export default {
+  components: {
+    NumberTable,
+  },
+};
 </script>
 
 <style lang="scss" scoped></style>
