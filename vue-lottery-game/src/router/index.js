@@ -20,9 +20,9 @@ const ifAuthenticated = (to, from, next) => {
 
 const routes = [
   {
-    path: "/Login",
-    component: () => import("@/views/Login"),
-    name: "Login",
+    path: "/authentication",
+    component: () => import("@/views/UserAuth"),
+    name: "Authentication",
     beforeEnter: ifAuthenticated,
   },
   {
