@@ -1,19 +1,21 @@
-import { createUser } from "@/api/login.js";
+import { authUser } from "@/api/login.js";
 
 export default {
-  login() {},
-  signup(context, payload) {
+  auth(context, payload) {
+    let isLogin = payload.isLogin;
     let userEmail = payload.email;
     let userPassword = payload.password;
     return new Promise((resolve, reject) => {
-      createUser(userEmail, userPassword)
-        .then((repsonseData) => {
+      authUser(isLogin, userEmail, userPassword)
+        .then((response) => {
+          console.log(response.data);
           context.commit("setUser", {
-            token: repsonseData.idToken,
-            userId: repsonseData.localId,
-            tokenExpiration: repsonseData.expiresIn,
+            token: response.data.idToken,
+            userId: response.data.localId,
+            tokenExpiration: response.data.expiresIn,
           });
-          resolve(repsonseData);
+          // localStorage.setItem("user-token", response.data.idToken);
+          resolve(response.data);
         })
         .catch((error) => {
           const errorMessage = new Error(

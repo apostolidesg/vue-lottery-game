@@ -5,6 +5,13 @@
         <div v-if="!!error" class="alert alert-danger" role="alert">
           {{ error }}
         </div>
+        <div
+          v-if="authMode !== 'login' && success"
+          class="alert alert-success"
+          role="alert"
+        >
+          User created successfully! Please log in.
+        </div>
         <form @submit.prevent="submitUser()">
           <div class="mb-3">
             <label for="emailInput" class="form-label">Email address</label>
@@ -56,6 +63,7 @@
           </div>
           <div class="mb-3 form-check">
             <input
+              v-model="isChecked"
               type="checkbox"
               class="form-check-input"
               id="consent"
@@ -110,7 +118,18 @@ export default {
       userPwd: "",
       isLoading: false,
       error: null,
+      success: false,
+      isChecked: false,
     };
+  },
+  watch: {
+    authMode() {
+      this.userEmail = "";
+      this.userPwd = "";
+      this.success = false;
+      this.error = null;
+      this.isChecked = false;
+    },
   },
   computed: {
     checkPwd() {
@@ -118,9 +137,6 @@ export default {
     },
   },
   methods: {
-    switchAuthMode(value) {
-      this.$emit("toggle-authorization", value);
-    },
     togglePassword() {
       this.inputType = this.$refs["psdInput"].type;
 
@@ -130,19 +146,27 @@ export default {
     },
     submitUser() {
       this.isLoading = true;
+      this.error = null;
+      this.success = false;
+      let dispatchObject = {
+        isLogin: this.authMode === "login" ? true : false,
+        email: this.userEmail,
+        password: this.userPwd,
+      };
 
-      if (this.authMode === "login") {
-        console.log("login");
-      } else {
-        this.$store
-          .dispatch("signup", {
-            email: this.userEmail,
-            password: this.userPwd,
-          })
-          .catch((error) => {
-            this.error = error.message;
-          });
-      }
+      this.$store
+        .dispatch("auth", dispatchObject)
+        .then(() => {
+          if (this.authMode === "login") {
+            this.$router.push("/Home");
+          } else {
+            this.success = true;
+          }
+        })
+        .catch((error) => {
+          this.error = error.message;
+        });
+
       this.isLoading = false;
     },
   },

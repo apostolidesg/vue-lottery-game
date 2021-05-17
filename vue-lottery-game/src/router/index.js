@@ -1,16 +1,17 @@
 import { createRouter, createWebHistory } from "vue-router";
+import store from "../store";
 
 const ifNotAuthenticated = (to, from, next) => {
-  let authenticated = false;
+  let authenticated = store.getters.isAuthenticated;
   if (!authenticated) {
-    next("/Login");
+    next("/authentication");
     return;
   }
   next();
 };
 
 const ifAuthenticated = (to, from, next) => {
-  let authenticated = false;
+  let authenticated = store.getters.isAuthenticated;
   if (authenticated) {
     next("/");
     return;
@@ -19,14 +20,15 @@ const ifAuthenticated = (to, from, next) => {
 };
 
 const routes = [
+  { path: "/:catchAll(.*)", redirect: "/Home" },
   {
-    path: "/authentication",
+    path: "/Authentication",
     component: () => import("@/views/UserAuth"),
     name: "Authentication",
     beforeEnter: ifAuthenticated,
   },
   {
-    path: "/",
+    path: "/Home",
     name: "Home",
     component: () => import("@/views/Home"),
     beforeEnter: ifNotAuthenticated,

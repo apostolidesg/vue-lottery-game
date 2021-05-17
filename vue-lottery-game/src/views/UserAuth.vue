@@ -4,10 +4,7 @@
       :authMode="authMode"
       @toggle-authorization="switchAuthMode"
     ></authentication-tabs>
-    <authentication-form
-      :authMode="authMode"
-      @toggle-authorization="switchAuthMode"
-    ></authentication-form>
+    <authentication-form :authMode="authMode"></authentication-form>
   </div>
 </template>
 
