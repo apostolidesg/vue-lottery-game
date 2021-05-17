@@ -2,6 +2,9 @@
   <div class="container">
     <div class="row justify-content-center">
       <div class="col col-12 col-sm-6 col-xl-4 p-4 form-border">
+        <div v-if="!!error" class="alert alert-danger" role="alert">
+          {{ error }}
+        </div>
         <form @submit.prevent="submitUser()">
           <div class="mb-3">
             <label for="emailInput" class="form-label">Email address</label>
@@ -74,7 +77,17 @@
             type="submit"
             class="btn btn-primary w-100"
           >
-            Sign in
+            <div v-if="isLoading">
+              <span
+                class="spinner-border spinner-border-sm"
+                role="status"
+                aria-hidden="true"
+              ></span>
+              Loading...
+            </div>
+            <div v-else>
+              Sign up
+            </div>
           </button>
         </form>
       </div>
@@ -95,6 +108,8 @@ export default {
       inputType: "password",
       userEmail: "",
       userPwd: "",
+      isLoading: false,
+      error: null,
     };
   },
   computed: {
@@ -113,20 +128,20 @@ export default {
         ? (this.$refs["psdInput"].type = "text")
         : (this.$refs["psdInput"].type = "password");
     },
-    async submitUser() {
+    submitUser() {
       this.isLoading = true;
 
-      try {
-        if (this.authMode === "login") {
-          console.log("login");
-        } else {
-          await this.$store.dispatch("signup", {
+      if (this.authMode === "login") {
+        console.log("login");
+      } else {
+        this.$store
+          .dispatch("signup", {
             email: this.userEmail,
             password: this.userPwd,
+          })
+          .catch((error) => {
+            this.error = error.message;
           });
-        }
-      } catch (err) {
-        this.error = err.message || "Failed to authenticate.";
       }
       this.isLoading = false;
     },

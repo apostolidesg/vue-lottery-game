@@ -5,21 +5,22 @@ export default {
   signup(context, payload) {
     let userEmail = payload.email;
     let userPassword = payload.password;
-    createUser(userEmail, userPassword)
-      .then((repsonseData) => {
-        console.log(repsonseData);
-        context.commit("setUser", {
-          token: repsonseData.idToken,
-          userId: repsonseData.localId,
-          tokenExpiration: repsonseData.expiresIn,
+    return new Promise((resolve, reject) => {
+      createUser(userEmail, userPassword)
+        .then((repsonseData) => {
+          context.commit("setUser", {
+            token: repsonseData.idToken,
+            userId: repsonseData.localId,
+            tokenExpiration: repsonseData.expiresIn,
+          });
+          resolve(repsonseData);
+        })
+        .catch((error) => {
+          const errorMessage = new Error(
+            error.response.data.error.message || "Failed to authenticate."
+          );
+          reject(errorMessage);
         });
-      })
-      .catch((error) => {
-        console.log(error.response.data.error.message);
-        const errorMessage = new Error(
-          error.response.data.error.message || "Failed to authenticate."
-        );
-        throw errorMessage;
-      });
+    });
   },
 };

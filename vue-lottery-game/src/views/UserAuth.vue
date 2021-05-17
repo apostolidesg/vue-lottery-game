@@ -22,8 +22,6 @@ export default {
   data() {
     return {
       authMode: "login",
-      isLoading: false,
-      error: null,
     };
   },
   methods: {
