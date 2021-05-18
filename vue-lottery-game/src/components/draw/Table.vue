@@ -1,9 +1,9 @@
 <template>
   <div class="grid-wrapper p-2">
-    <div v-if="currentRoute === 'Home'" class="title my-4">
+    <div v-if="currentRoute === 'Home'" class="title my-2 my-sm-4">
       Select {{ 5 - selectedNumbers.length }} numbers
     </div>
-    <div v-if="currentRoute === 'Draw'" class="title my-4">
+    <div v-if="currentRoute === 'Draw'" class="title my-2 my-sm-4">
       Draw in progress!
     </div>
     <div class="grid-container my-4">

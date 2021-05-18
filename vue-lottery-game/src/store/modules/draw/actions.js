@@ -3,6 +3,7 @@ export default {
     context.commit("setDraw", {
       isReady: payload.isReady,
       drawNumbers: payload.drawNumbers,
+      winningNumbers: payload.winningNumbers,
       playerBet: payload.playerBet,
     });
   },

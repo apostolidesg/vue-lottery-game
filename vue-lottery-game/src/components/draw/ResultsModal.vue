@@ -24,6 +24,8 @@
 </template>
 
 <script>
+import { addHistory } from "@/api/history.js";
+
 export default {
   props: {
     isShown: {
@@ -32,6 +34,12 @@ export default {
     },
   },
   emits: ["change-draw-status"],
+  data() {
+    return {
+      drawNumbersArr: [],
+      winningNumbersArr: [],
+    };
+  },
   computed: {
     playerWon() {
       return this.$store.getters.totalAmountWon > 0;
@@ -39,7 +47,21 @@ export default {
   },
   methods: {
     saveDraw() {
-      console.log("saved");
+      this.$store.getters.drawNumbers.forEach((element) => {
+        this.drawNumbersArr.push(element.value);
+      });
+      this.$store.getters.winningNumbers.forEach((element) => {
+        this.winningNumbersArr.push(element.value);
+      });
+      console.log(this.winningNumbersArr);
+      addHistory(
+        this.drawNumbersArr,
+        this.winningNumbersArr,
+        this.$store.getters.playerBet,
+        this.$store.getters.totalAmountWon
+      ).then(() => {
+        // this.playAgain();
+      });
     },
     playAgain() {
       this.$emit("change-draw-status");

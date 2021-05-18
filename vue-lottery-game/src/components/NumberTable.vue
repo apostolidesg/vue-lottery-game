@@ -113,6 +113,7 @@ export default {
       let dispatchObject = {
         isReady: true,
         drawNumbers: this.selectedNumbers,
+        winningNumbers: this.winningNumbers,
         playerBet: playerBet,
       };
       this.$store.dispatch("startDraw", dispatchObject);
@@ -128,7 +129,7 @@ export default {
   bottom: 50%;
   left: 0%;
   transform: translate(0px, 50%);
-  z-index: 1;
+  z-index: 0;
 
   .selected-numbers-wrapper {
     display: flex;

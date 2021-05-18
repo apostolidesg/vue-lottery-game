@@ -21,6 +21,12 @@ const routes = [
     component: () => import("@/views/Draw"),
     meta: { authRequired: true },
   },
+  {
+    path: "/History",
+    name: "History",
+    component: () => import("@/views/History"),
+    meta: { authRequired: true },
+  },
 ];
 
 const router = createRouter({

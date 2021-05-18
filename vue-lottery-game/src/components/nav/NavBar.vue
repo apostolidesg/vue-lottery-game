@@ -33,6 +33,11 @@
               >Draw</router-link
             >
           </li>
+          <li class="nav-item mx-3">
+            <router-link to="/History" class="nav-link btn btn-lg" role="button"
+              >History</router-link
+            >
+          </li>
           <li class="nav-item dropdown">
             <span
               class="nav-link dropdown-toggle"

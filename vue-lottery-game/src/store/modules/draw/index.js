@@ -7,8 +7,9 @@ export default {
     return {
       isReady: false,
       drawNumbers: null,
-      playerBet: null,
-      totalAmountWon: null,
+      winningNumbers: null,
+      playerBet: 0,
+      totalAmountWon: 0,
     };
   },
   mutations,

@@ -202,10 +202,7 @@ export default {
 @media screen and (max-width: 600px) {
   .bet-input {
     .input-group {
-      width: 20%;
-    }
-    .bet-label {
-      width: 40%;
+      width: 35%;
     }
   }
 }
