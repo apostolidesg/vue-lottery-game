@@ -42,7 +42,13 @@
         </div>
         <div class="control-container">
           <span @click="clearSelections()">Clear All</span>
-          <span>Submit</span>
+          <span
+            class="btn btn-lg"
+            :class="{ disabled: submitReady }"
+            role="button"
+            @click="startDraw()"
+            >Submit</span
+          >
         </div>
       </div>
     </div>
@@ -57,6 +63,11 @@ export default {
       givenNumbers: data.numbers,
       selectedNumbers: [],
     };
+  },
+  computed: {
+    submitReady() {
+      return this.selectedNumbers.length < 5;
+    },
   },
   methods: {
     selectNumber(number) {
@@ -90,6 +101,15 @@ export default {
           }
         });
       }
+    },
+    startDraw() {
+      let dispatchObject = {
+        isReady: true,
+        drawNumbers: this.selectedNumbers,
+        playerBet: 5,
+      };
+      this.$store.dispatch("startDraw", dispatchObject);
+      this.$router.push("/Draw");
     },
   },
 };

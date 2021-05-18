@@ -16,12 +16,22 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mb-2 mb-lg-0">
           <li class="nav-item mx-3">
-            <router-link to="/Home" class="nav-link active" aria-current="page"
+            <router-link
+              to="/Home"
+              class="nav-link active btn btn-lg"
+              aria-current="page"
+              role="button"
               >Home</router-link
             >
           </li>
           <li class="nav-item mx-3">
-            <router-link to="/Home" class="nav-link">Link</router-link>
+            <router-link
+              to="/Draw"
+              class="nav-link btn btn-lg"
+              :class="{ disabled: !isReady }"
+              role="button"
+              >Draw</router-link
+            >
           </li>
           <li class="nav-item dropdown">
             <span
@@ -55,6 +65,11 @@
 
 <script>
 export default {
+  computed: {
+    isReady() {
+      return this.$store.getters.isReady;
+    },
+  },
   methods: {
     logout() {
       this.$store.dispatch("logout");
@@ -89,6 +104,9 @@ export default {
     align-items: center;
     justify-content: space-evenly;
     cursor: pointer;
+  }
+  .btn:focus {
+    box-shadow: none;
   }
 }
 </style>

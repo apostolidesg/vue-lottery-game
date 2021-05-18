@@ -1,6 +1,10 @@
 <template>
   <nav-bar v-if="$store.getters.isAuthenticated"></nav-bar>
-  <router-view />
+  <router-view v-slot="{ Component }">
+    <transition name="route" mode="out-in">
+      <component :is="Component"></component>
+    </transition>
+  </router-view>
 </template>
 
 <script>
@@ -38,5 +42,17 @@ body {
   width: 100%;
   height: 100%;
   background-color: #529fff;
+}
+.route-enter-from {
+  opacity: 0;
+}
+.route-enter-active {
+  transition: all 0.3s ease;
+}
+.route-leave-to {
+  opacity: 0;
+}
+.route-leave-active {
+  transition: all 0.3s ease;
 }
 </style>

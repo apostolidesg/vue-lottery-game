@@ -15,6 +15,12 @@ const routes = [
     component: () => import("@/views/Home"),
     meta: { authRequired: true },
   },
+  {
+    path: "/Draw",
+    name: "Draw",
+    component: () => import("@/views/Draw"),
+    meta: { authRequired: true },
+  },
 ];
 
 const router = createRouter({
@@ -26,6 +32,8 @@ router.beforeEach(function(to, _, next) {
   if (to.meta.authRequired && !store.getters.isAuthenticated) {
     next("/Authentication");
   } else if (to.meta.authNotRequired && store.getters.isAuthenticated) {
+    next("/Home");
+  } else if (to.name === "Draw" && !store.getters.isReady) {
     next("/Home");
   } else {
     next();
