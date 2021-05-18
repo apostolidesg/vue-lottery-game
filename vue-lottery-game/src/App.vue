@@ -20,6 +20,7 @@ export default {
   },
   created() {
     this.$store.dispatch("tryLogin");
+    this.$router.push("/Home");
   },
   watch: {
     didAutoLogout(curValue, oldValue) {
