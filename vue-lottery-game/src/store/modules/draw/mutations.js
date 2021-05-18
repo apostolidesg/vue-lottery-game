@@ -7,4 +7,10 @@ export default {
   setAmountWon(state, payload) {
     state.totalAmountWon = payload.totalAmountWon;
   },
+  resetDraw(state) {
+    state.isReady = false;
+    state.drawNumbers = null;
+    state.playerBet = null;
+    state.totalAmountWon = null;
+  },
 };

@@ -12,6 +12,8 @@
       <div class="col col-12 col-sm-4 selected-numbers-wrapper">
         <draw-numbers
           :selectedNumbers="selectedNumbers"
+          :playerBet="playerBet"
+          :winningNumbers="winningNumbers"
           @remove-selection="removeSelection"
           @clear-selections="clearSelections"
           @start-draw="startDraw"
@@ -31,11 +33,13 @@ export default {
     TableComponent,
     DrawNumbers,
   },
+  emits: ["show-modal"],
   data() {
     return {
       givenNumbers: data.numbers,
       selectedNumbers: [],
-      secondaryArr: [],
+      winningNumbers: [],
+      playerBet: 0,
     };
   },
   computed: {
@@ -44,6 +48,7 @@ export default {
     },
   },
   created() {
+    this.clearSelections();
     if (this.currentRoute === "Draw") {
       this.fetchDrawData();
     }
@@ -51,6 +56,7 @@ export default {
   methods: {
     fetchDrawData() {
       this.selectedNumbers = this.$store.getters.drawNumbers;
+      this.playerBet = this.$store.getters.playerBet;
       this.drawProcess();
     },
     drawProcess() {
@@ -59,13 +65,16 @@ export default {
           let random = Math.floor(Math.random() * this.givenNumbers.length);
           this.givenNumbers.forEach((element) => {
             if (element.value === random && !element.isGlowing) {
-              element.isGlowing = `glow-${i}`;
+              element.isGlowing = `glow${i}`;
+              this.winningNumbers.push(element);
               i++;
             }
           });
         }
-        console.log(this.givenNumbers);
       }, 3000);
+      setTimeout(() => {
+        this.$emit("show-modal");
+      }, 22000);
     },
     selectNumber(number) {
       if (this.selectedNumbers.length < 5 && !number.isSelected) {
@@ -97,13 +106,14 @@ export default {
       this.selectedNumbers = [];
       this.givenNumbers.forEach((element) => {
         element.isSelected = false;
+        element.isGlowing = false;
       });
     },
-    startDraw() {
+    startDraw(playerBet) {
       let dispatchObject = {
         isReady: true,
         drawNumbers: this.selectedNumbers,
-        playerBet: 5,
+        playerBet: playerBet,
       };
       this.$store.dispatch("startDraw", dispatchObject);
       this.$router.push("/Draw");
@@ -128,6 +138,44 @@ export default {
 </style>
 
 <style lang="scss">
+.glow0,
+.glow1,
+.glow2,
+.glow3,
+.glow4 {
+  background-color: #fff !important;
+  box-shadow: 0 0 5px 1px black;
+  transition: all 0.3s ease;
+}
+.match0,
+.match1,
+.match2,
+.match3,
+.match4 {
+  background-color: #e8910e !important;
+  box-shadow: 0 0 5px 1px black;
+  transition: all 0.3s ease;
+}
+.glow0,
+.match0 {
+  transition-delay: 0s;
+}
+.glow1,
+.match1 {
+  transition-delay: 4s;
+}
+.glow2,
+.match2 {
+  transition-delay: 8s;
+}
+.glow3,
+.match3 {
+  transition-delay: 12s;
+}
+.glow4,
+.match4 {
+  transition-delay: 16s;
+}
 @media screen and (max-width: 600px) {
   .center-position {
     bottom: 45%;
@@ -135,7 +183,7 @@ export default {
   .grid-wrapper {
     .grid-container {
       span {
-        font-size: 130%;
+        font-size: 130% !important;
       }
     }
   }

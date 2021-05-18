@@ -3,10 +3,18 @@
 </template>
 
 <script>
-import NumberTable from "@/components/NumberTable.vue";
+import NumberTable from "@/components/NumberTable";
 export default {
   components: {
     NumberTable,
+  },
+  created() {
+    this.resetStore();
+  },
+  methods: {
+    resetStore() {
+      this.$store.dispatch("resetDraw");
+    },
   },
 };
 </script>

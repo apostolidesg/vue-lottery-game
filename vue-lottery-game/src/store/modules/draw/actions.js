@@ -6,4 +6,12 @@ export default {
       playerBet: payload.playerBet,
     });
   },
+  resetDraw(context) {
+    context.commit("resetDraw");
+  },
+  setAmount(context, payload) {
+    context.commit("setAmountWon", {
+      totalAmountWon: payload.amountWon,
+    });
+  },
 };

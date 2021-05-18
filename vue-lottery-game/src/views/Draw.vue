@@ -1,23 +1,39 @@
 <template>
-  <number-table></number-table>
+  <div>
+    <number-table @show-modal="isShown = true"></number-table>
+    <results-modal
+      :isShown="isShown"
+      @change-draw-status="changeDrawStatus"
+    ></results-modal>
+  </div>
 </template>
 
 <script>
 import NumberTable from "@/components/NumberTable.vue";
+import ResultsModal from "@/components/draw/ResultsModal";
 
 export default {
   components: {
     NumberTable,
+    ResultsModal,
+  },
+  data() {
+    return {
+      isShown: false,
+      isDrawFinished: false,
+    };
   },
   beforeRouteLeave(to, from, next) {
-    const answer = window.confirm(
-      "Do you really want to leave? you have unsaved changes!"
-    );
-    if (answer) {
+    if (this.isDrawFinished) {
       next();
     } else {
       next(false);
     }
+  },
+  methods: {
+    changeDrawStatus() {
+      this.isDrawFinished = true;
+    },
   },
 };
 </script>

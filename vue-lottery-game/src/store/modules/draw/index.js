@@ -5,7 +5,7 @@ import actions from "@/store/modules/draw/actions.js";
 export default {
   state() {
     return {
-      isReady: true,
+      isReady: false,
       drawNumbers: null,
       playerBet: null,
       totalAmountWon: null,

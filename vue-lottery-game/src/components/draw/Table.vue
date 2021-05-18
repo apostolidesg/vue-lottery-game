@@ -3,6 +3,9 @@
     <div v-if="currentRoute === 'Home'" class="title my-4">
       Select {{ 5 - selectedNumbers.length }} numbers
     </div>
+    <div v-if="currentRoute === 'Draw'" class="title my-4">
+      Draw in progress!
+    </div>
     <div class="grid-container my-4">
       <span
         v-for="number in givenNumbers"
@@ -11,11 +14,11 @@
         class="my-1"
         :class="{
           selected: number.isSelected && currentRoute === 'Home',
-          glow0: number.isGlowing === 'glow-0' && currentRoute === 'Draw',
-          glow1: number.isGlowing === 'glow-1' && currentRoute === 'Draw',
-          glow2: number.isGlowing === 'glow-2' && currentRoute === 'Draw',
-          glow3: number.isGlowing === 'glow-3' && currentRoute === 'Draw',
-          glow4: number.isGlowing === 'glow-4' && currentRoute === 'Draw',
+          glow0: number.isGlowing === 'glow0' && currentRoute === 'Draw',
+          glow1: number.isGlowing === 'glow1' && currentRoute === 'Draw',
+          glow2: number.isGlowing === 'glow2' && currentRoute === 'Draw',
+          glow3: number.isGlowing === 'glow3' && currentRoute === 'Draw',
+          glow4: number.isGlowing === 'glow4' && currentRoute === 'Draw',
         }"
       >
         {{ number.value }}
@@ -107,30 +110,6 @@ export default {
       border-radius: 50px;
       cursor: pointer;
     }
-  }
-  .glow0,
-  .glow1,
-  .glow2,
-  .glow3,
-  .glow4 {
-    background-color: #fff !important;
-    box-shadow: 0 0 5px 1px black;
-  }
-  .glow0 {
-    transition: all 0.3s ease;
-    transition-delay: 0s;
-  }
-  .glow1 {
-    transition-delay: 4s;
-  }
-  .glow2 {
-    transition-delay: 8s;
-  }
-  .glow3 {
-    transition-delay: 12s;
-  }
-  .glow4 {
-    transition-delay: 16s;
   }
 }
 </style>
