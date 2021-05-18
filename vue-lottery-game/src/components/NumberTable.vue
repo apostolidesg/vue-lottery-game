@@ -128,6 +128,7 @@ export default {
   bottom: 50%;
   left: 0%;
   transform: translate(0px, 50%);
+  z-index: 1;
 
   .selected-numbers-wrapper {
     display: flex;

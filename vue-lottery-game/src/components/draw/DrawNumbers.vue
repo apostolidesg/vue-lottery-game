@@ -48,7 +48,7 @@
     <span @click="clearSelections()">Clear All</span>
     <span
       class="btn btn-lg"
-      :class="{ disabled: submitReady || bet === 0 }"
+      :class="{ disabled: submitReady || bet <= 0 }"
       role="button"
       @click="startDraw()"
       >Submit</span
@@ -197,6 +197,16 @@ export default {
     background-color: white;
     cursor: pointer;
     box-shadow: 1px 2px 5px 0px black;
+  }
+}
+@media screen and (max-width: 600px) {
+  .bet-input {
+    .input-group {
+      width: 20%;
+    }
+    .bet-label {
+      width: 40%;
+    }
   }
 }
 </style>

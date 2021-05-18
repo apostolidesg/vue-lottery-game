@@ -80,33 +80,36 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.navbar-collapse {
-  justify-content: flex-end;
+.navbar {
+  z-index: 2;
+  .navbar-collapse {
+    justify-content: flex-end;
 
-  .nav-item {
-    display: flex;
-    align-items: center;
-  }
-  .dropdown-toggle {
-    display: flex;
-    align-items: center;
-  }
-  .avatar {
-    max-width: 35px;
-    max-height: 35px;
-  }
-  .logout-icon {
-    max-width: 25px;
-    max-height: 20px;
-  }
-  .dropdown-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    cursor: pointer;
-  }
-  .btn:focus {
-    box-shadow: none;
+    .nav-item {
+      display: flex;
+      align-items: center;
+    }
+    .dropdown-toggle {
+      display: flex;
+      align-items: center;
+    }
+    .avatar {
+      max-width: 35px;
+      max-height: 35px;
+    }
+    .logout-icon {
+      max-width: 25px;
+      max-height: 20px;
+    }
+    .dropdown-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      cursor: pointer;
+    }
+    .btn:focus {
+      box-shadow: none;
+    }
   }
 }
 </style>
