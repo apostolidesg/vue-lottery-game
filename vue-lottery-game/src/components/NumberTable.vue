@@ -35,7 +35,13 @@ export default {
     return {
       givenNumbers: data.numbers,
       selectedNumbers: [],
+      secondaryArr: [],
     };
+  },
+  computed: {
+    currentRoute() {
+      return this.$route.name;
+    },
   },
   created() {
     if (this.currentRoute === "Draw") {
@@ -45,6 +51,21 @@ export default {
   methods: {
     fetchDrawData() {
       this.selectedNumbers = this.$store.getters.drawNumbers;
+      this.drawProcess();
+    },
+    drawProcess() {
+      setTimeout(() => {
+        for (var i = 0; i < 5; ) {
+          let random = Math.floor(Math.random() * this.givenNumbers.length);
+          this.givenNumbers.forEach((element) => {
+            if (element.value === random && !element.isGlowing) {
+              element.isGlowing = `glow-${i}`;
+              i++;
+            }
+          });
+        }
+        console.log(this.givenNumbers);
+      }, 3000);
     },
     selectNumber(number) {
       if (this.selectedNumbers.length < 5 && !number.isSelected) {
