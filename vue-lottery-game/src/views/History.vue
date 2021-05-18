@@ -12,16 +12,18 @@
         </tr>
       </thead>
       <tbody v-if="draws">
-        <tr v-for="draw in draws" :key="draw.id">
-          <td>{{ draw.drawNumbers }}</td>
-          <td>{{ drawStatus(draw.totalAmountWon) }}</td>
-          <td>{{ draw.playerBet }} €</td>
-          <td>{{ drawAmountWon(draw.totalAmountWon) }}</td>
-          <td>{{ draw.expirationDate }}</td>
-          <td>
-            <div class="remove-history">
-              <img src="@/assets/images/close-icon.png" alt="" />
-            </div>
+        <tr v-for="(draw, index) in draws" :key="draw.id">
+          <td @click.self="test()">{{ draw.drawNumbers }}</td>
+          <td @click.self="test()">{{ drawStatus(draw.totalAmountWon) }}</td>
+          <td @click.self="test()">{{ draw.playerBet }} €</td>
+          <td @click.self="test()">{{ drawAmountWon(draw.totalAmountWon) }}</td>
+          <td @click.self="test()">{{ draw.expirationDate }}</td>
+          <td @click.self="test()">
+            <img
+              src="@/assets/images/close-icon.png"
+              alt=""
+              @click="deleteHistory(index)"
+            />
           </td>
         </tr>
       </tbody>
@@ -35,7 +37,7 @@
 </template>
 
 <script>
-import { fetchHistories } from "@/api/history.js";
+import { fetchHistories, deleteHistory } from "@/api/history.js";
 export default {
   data() {
     return {
@@ -51,6 +53,15 @@ export default {
         this.draws = response.data;
       });
     },
+    deleteHistory(index) {
+      deleteHistory(index).then(() => {
+        this.fetchData();
+      });
+      console.log("delete", index);
+    },
+    test() {
+      console.log("test");
+    },
     drawStatus(totalAmountWon) {
       return totalAmountWon > 0 ? "Won" : "Lost";
     },
@@ -65,11 +76,9 @@ export default {
 .container {
   background-color: white;
 
-  .remove-history {
-    img {
-      max-width: 20px;
-      cursor: pointer;
-    }
+  img {
+    max-width: 20px;
+    cursor: pointer;
   }
 
   .no-history {

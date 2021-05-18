@@ -3,7 +3,6 @@ export default {
     context.commit("setDraw", {
       isReady: payload.isReady,
       drawNumbers: payload.drawNumbers,
-      winningNumbers: payload.winningNumbers,
       playerBet: payload.playerBet,
     });
   },
@@ -13,6 +12,11 @@ export default {
   setAmount(context, payload) {
     context.commit("setAmountWon", {
       totalAmountWon: payload.amountWon,
+    });
+  },
+  setWinning(context, payload) {
+    context.commit("setWinningNumbers", {
+      winningNumbers: payload.winningNumbers,
     });
   },
 };

@@ -24,3 +24,9 @@ export function fetchHistories() {
     "https://vue-lottery-game-default-rtdb.europe-west1.firebasedatabase.app/histories.json"
   );
 }
+
+export function deleteHistory(historyId) {
+  return axios.delete(
+    `https://vue-lottery-game-default-rtdb.europe-west1.firebasedatabase.app/histories/${historyId}.json`
+  );
+}

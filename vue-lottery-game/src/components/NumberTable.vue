@@ -71,6 +71,10 @@ export default {
             }
           });
         }
+        let dispatchObject = {
+          winningNumbers: this.winningNumbers,
+        };
+        this.$store.dispatch("setWinning", dispatchObject);
       }, 3000);
       setTimeout(() => {
         this.$emit("show-modal");
@@ -113,7 +117,6 @@ export default {
       let dispatchObject = {
         isReady: true,
         drawNumbers: this.selectedNumbers,
-        winningNumbers: this.winningNumbers,
         playerBet: playerBet,
       };
       this.$store.dispatch("startDraw", dispatchObject);

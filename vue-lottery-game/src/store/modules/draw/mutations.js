@@ -15,4 +15,7 @@ export default {
     state.playerBet = 0;
     state.totalAmountWon = 0;
   },
+  setWinningNumbers(state, payload) {
+    state.winningNumbers = payload.winningNumbers;
+  },
 };

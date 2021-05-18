@@ -53,14 +53,13 @@ export default {
       this.$store.getters.winningNumbers.forEach((element) => {
         this.winningNumbersArr.push(element.value);
       });
-      console.log(this.winningNumbersArr);
       addHistory(
         this.drawNumbersArr,
         this.winningNumbersArr,
         this.$store.getters.playerBet,
         this.$store.getters.totalAmountWon
       ).then(() => {
-        // this.playAgain();
+        this.playAgain();
       });
     },
     playAgain() {
