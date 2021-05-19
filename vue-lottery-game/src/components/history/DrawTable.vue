@@ -16,7 +16,6 @@
           <th scope="col">Draw Status</th>
           <th scope="col">Player Bet</th>
           <th scope="col">Amount Won</th>
-          <th scope="col">Date</th>
           <th scope="col">Actions</th>
         </tr>
       </thead>
@@ -30,7 +29,6 @@
           <td @click.self="toggleModal(draw)">
             {{ drawAmountWon(draw.totalAmountWon) }}
           </td>
-          <td @click.self="toggleModal(draw)">{{ draw.expirationDate }}</td>
           <td @click.self="toggleModal(draw)">
             <img
               src="@/assets/images/close-icon.png"
