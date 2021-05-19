@@ -149,7 +149,7 @@ export default {
       this.error = null;
       this.success = false;
       let dispatchObject = {
-        isLogin: this.authMode === "login" ? true : false,
+        isLogin: this.authMode === "login",
         email: this.userEmail,
         password: this.userPwd,
       };
@@ -164,7 +164,9 @@ export default {
           }
         })
         .catch((error) => {
-          this.error = error.message;
+          error.message === "INVALID_EMAIL"
+            ? (this.error = 'Invalid username. Try adding "@" or ".com".')
+            : (this.error = error.message);
         });
 
       this.isLoading = false;

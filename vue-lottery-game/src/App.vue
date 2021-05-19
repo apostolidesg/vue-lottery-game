@@ -1,5 +1,5 @@
 <template>
-  <nav-bar v-if="$store.getters.isAuthenticated"></nav-bar>
+  <nav-bar v-if="$route.name != 'Authentication'"></nav-bar>
   <router-view v-slot="{ Component }">
     <transition name="route" mode="out-in">
       <component :is="Component"></component>
