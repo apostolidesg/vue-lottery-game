@@ -90,6 +90,12 @@ export default {
 <style lang="scss" scoped>
 .navbar {
   z-index: 2;
+
+  .navbar-brand {
+    img {
+      max-width: 40px;
+    }
+  }
   .navbar-collapse {
     justify-content: flex-end;
 

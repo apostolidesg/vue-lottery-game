@@ -1,7 +1,13 @@
 <template>
   <div class="grid-wrapper p-2">
     <div v-if="currentRoute === 'Home'" class="title my-2 my-sm-4">
-      Select {{ 5 - selectedNumbers.length }} numbers
+      <span v-if="5 - selectedNumbers.length > 1"
+        >Select {{ 5 - selectedNumbers.length }} numbers</span
+      >
+      <span v-else-if="5 - selectedNumbers.length === 1"
+        >Select {{ 5 - selectedNumbers.length }} more number</span
+      >
+      <span v-else>Maximum numbers reached</span>
     </div>
     <div v-if="currentRoute === 'Draw'" class="title my-2 my-sm-4">
       Draw in progress!
@@ -88,8 +94,9 @@ export default {
 
     .selected {
       border: solid 3px red;
-      opacity: 50%;
+      // background-color: grey;
       cursor: not-allowed;
+      opacity: 0.5 !important;
     }
   }
   .title {
