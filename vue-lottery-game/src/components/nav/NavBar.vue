@@ -1,7 +1,10 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-      <span class="navbar-brand">Navbar</span>
+      <span class="navbar-brand">
+        <img src="@/assets/images/wheel.png" alt="" />
+        My Lottery
+      </span>
       <button
         class="navbar-toggler"
         type="button"
