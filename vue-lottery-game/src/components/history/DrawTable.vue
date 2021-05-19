@@ -38,12 +38,13 @@
           </td>
         </tr>
       </tbody>
-      <div v-else class="no-history">
-        <div class="no-history-modal p-4">
-          No Histories Yet...
-        </div>
-      </div>
     </table>
+  </div>
+
+  <div v-if="!draws" class="container no-history">
+    <div class="no-history-modal w-75 w-sm-50 p-4">
+      No Histories Yet...
+    </div>
   </div>
 </template>
 
@@ -53,7 +54,7 @@ export default {
   emits: ["toggle-modal"],
   data() {
     return {
-      draws: null,
+      draws: true,
       isDeleted: false,
     };
   },
@@ -101,20 +102,18 @@ export default {
     margin: auto;
     text-align: center;
   }
-  .no-history {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
-    .no-history-modal {
-      background: white;
-      border-radius: 16px;
-      font-size: 150%;
-      font-weight: bold;
-      color: #222;
-      box-shadow: 1px 1px 3px 2px grey;
-    }
+}
+.no-history {
+  background-color: #9acd3200;
+  .no-history-modal {
+    margin: auto;
+    text-align: center;
+    background: white;
+    border-radius: 16px;
+    font-size: 150%;
+    font-weight: bold;
+    color: #222;
+    box-shadow: 1px 1px 3px 2px grey;
   }
 }
 </style>
